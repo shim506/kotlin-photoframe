@@ -22,14 +22,14 @@ private const val TAG = "MainActivity"
 
 
 class MainActivity : AppCompatActivity() {
-    private var constLaytout: View? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        constLaytout = findViewById<View>(R.id.const_layout)
+        var constLaytout = findViewById<View>(R.id.const_layout)
         val myName: TextView = findViewById(R.id.tv_MyName)
         val myButton: TextView = findViewById(R.id.btn_myButton)
         val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
@@ -51,11 +51,11 @@ class MainActivity : AppCompatActivity() {
 
         myButton.text = "다음"
 
-
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
                 if (it.resultCode == RESULT_OK) {
-                    Snackbar.make(constLaytout!!, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
                 }
             }
         myButton.setOnClickListener {
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
 
         /*
-
         myButton.setOnClickListener {
             // 사진 불러오는 작업 구현필요
             Snackbar.make(constlaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).setAction("취소") {
@@ -108,10 +107,6 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
         Log.d(TAG, "onRestart")
 
-
-        constLaytout?.let {
-            Snackbar.make(it, "사진을 불러왔습니다", Snackbar.LENGTH_SHORT).show()
-        }
     }
 
     override fun onDestroy() {
