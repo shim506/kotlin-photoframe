@@ -1,17 +1,20 @@
 package com.codesquad.kotlinphotoframe
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Switch
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.GetContent
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.Dimension
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 
@@ -29,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         constLaytout = findViewById<View>(R.id.const_layout)
         val myName: TextView = findViewById(R.id.tv_MyName)
         val myButton: TextView = findViewById(R.id.btn_myButton)
+        val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
+
 
         myName.text = "Jay의 사진 액자"
         myName.setTextSize(Dimension.SP, 40F)
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
-                        Snackbar.make(constLaytout!!, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(constLaytout!!, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
                 }
             }
         myButton.setOnClickListener {
@@ -68,6 +73,15 @@ class MainActivity : AppCompatActivity() {
             }
                 .show()
         }*/
+
+        swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     override fun onStart() {
