@@ -4,8 +4,11 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.Dimension
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "MainActivity"
 
@@ -16,21 +19,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var tv_MyName : TextView = findViewById(R.id.tv_MyName)
+        val constlaytout = findViewById<View>(R.id.const_layout)
+        val myName: TextView = findViewById(R.id.tv_MyName)
+        val myButton: TextView = findViewById(R.id.btn_myButton)
 
-        tv_MyName.text = "Jay의 사진 액자"
-        tv_MyName.setTextSize(Dimension.SP , 40F)
+        myName.text = "Jay의 사진 액자"
+        myName.setTextSize(Dimension.SP, 40F)
 
 
         // 회색
-        tv_MyName.setTextColor(Color.rgb(146,146,146))
+        myName.setTextColor(Color.rgb(146, 146, 146))
 
         // 하늘색
-        tv_MyName.setBackgroundColor(Color.parseColor("#89a5ea"))
+        myName.setBackgroundColor(Color.parseColor("#89a5ea"))
 
 
         Log.d(TAG, "onCreate")
-        Log.d(TAG , tv_MyName.left.toString())
+        Log.d(TAG, myName.left.toString())
 
+
+
+        myButton.setOnClickListener {
+            // 사진 불러오는 작업 구현필요
+
+            Snackbar.make(constlaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).setAction("취소") {
+                Log.d(TAG, "사진을 불러오는 작업 취소")
+            }
+                .show()
+        }
     }
 }

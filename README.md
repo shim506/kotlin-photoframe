@@ -3,10 +3,14 @@ README.md 파일을 자신의 프로젝트에 대한 설명으로 변경한다. 
 
 # Step 1
 
+<br></br>
+
 ## 프로젝트 실행하기
 
 - [x] Logcat 활용하기
   ![img.png](img.png)
+
+<br></br>
 
 ## TextView 구현하기
 
@@ -18,8 +22,22 @@ README.md 파일을 자신의 프로젝트에 대한 설명으로 변경한다. 
     - [x] TextView 글자색 , 배경색 ,글자 크기 변경해보기
 
 ![img_1.png](img_1.png)
+<br></br>
 
 ## Button 구현하기
 
+- [x] activity_main.xml에 Button을 추가한다.
+
+- [x] MainActivity에서 Button에 대한 참조를 얻는다.
+- [x] Button을 클릭하면 '사진을 불러옵니다' 메시지를 띄운다.
+    - [x] Button 클릭 이벤트에 대한 알림을 받아 처리한다.
+    - [x] Snackbar 를 활용한다.
+
+![img_2.png](img_2.png)
+![img_4.png](img_4.png)
+
+<br></br>
+
 ## 다른 Activity 로 이동 하기
 
+<br></br>
