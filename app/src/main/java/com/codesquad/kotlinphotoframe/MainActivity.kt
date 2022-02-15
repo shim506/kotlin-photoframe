@@ -1,25 +1,32 @@
 package com.codesquad.kotlinphotoframe
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.GetContent
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.Dimension
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity() {
+    private var constLaytout: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val constlaytout = findViewById<View>(R.id.const_layout)
+
+        constLaytout = findViewById<View>(R.id.const_layout)
         val myName: TextView = findViewById(R.id.tv_MyName)
         val myButton: TextView = findViewById(R.id.btn_myButton)
 
@@ -35,17 +42,68 @@ class MainActivity : AppCompatActivity() {
 
 
         Log.d(TAG, "onCreate")
-        Log.d(TAG, myName.left.toString())
 
 
+        myButton.text = "다음"
+
+
+        val getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK) {
+                        Snackbar.make(constLaytout!!, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        myButton.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            getResult.launch(intent)
+        }
+
+
+        /*
 
         myButton.setOnClickListener {
             // 사진 불러오는 작업 구현필요
-
             Snackbar.make(constlaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).setAction("취소") {
                 Log.d(TAG, "사진을 불러오는 작업 취소")
             }
                 .show()
+        }*/
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart")
+
+
+        constLaytout?.let {
+            Snackbar.make(it, "사진을 불러왔습니다", Snackbar.LENGTH_SHORT).show()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy")
+    }
+
+
 }
