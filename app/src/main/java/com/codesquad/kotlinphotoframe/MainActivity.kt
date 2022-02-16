@@ -28,58 +28,40 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d(TAG, "onCreate")
 
-        var constLaytout = findViewById<View>(R.id.const_layout)
+        val constLayout = findViewById<View>(R.id.const_layout)
         val myName: TextView = findViewById(R.id.tv_MyName)
         val myButton: TextView = findViewById(R.id.btn_myButton)
         val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
 
-
+        // 추후 앱 사용자에 따라 다른 데이터를 대입해줄 수 있음
         myName.text = "Jay의 사진 액자"
         myName.setTextSize(Dimension.SP, 40F)
-
-
-        // 회색
-        myName.setTextColor(Color.rgb(146, 146, 146))
-
-        // 하늘색
-        myName.setBackgroundColor(Color.parseColor("#89a5ea"))
-
-
-        Log.d(TAG, "onCreate")
-
-
         myButton.text = "다음"
+
+        // 다크 모드 동작 컨트롤
+        darkModeListen(swDarkMode)
 
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-
-                if (it.resultCode == RESULT_OK) {
-                        Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
-                }
+                if (it.resultCode == RESULT_OK) Snackbar.make(
+                    constLayout,
+                    "사진을 불러옵니다",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
+
         myButton.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            getResult.launch(intent)
+            getResult.launch(Intent(this, SecondActivity::class.java))
         }
 
+    }
 
-        /*
-        myButton.setOnClickListener {
-            // 사진 불러오는 작업 구현필요
-            Snackbar.make(constlaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).setAction("취소") {
-                Log.d(TAG, "사진을 불러오는 작업 취소")
-            }
-                .show()
-        }*/
-
-        swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
-
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+    private fun darkModeListen(darkModeSwitch: Switch) {
+        darkModeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
