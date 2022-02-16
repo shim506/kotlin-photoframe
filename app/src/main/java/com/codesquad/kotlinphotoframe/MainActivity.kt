@@ -2,12 +2,15 @@ package com.codesquad.kotlinphotoframe
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,35 +30,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d(TAG, "onCreate")
 
         var constLaytout = findViewById<View>(R.id.const_layout)
         val myName: TextView = findViewById(R.id.tv_MyName)
-        val myButton: TextView = findViewById(R.id.btn_myButton)
+        val myButton: Button = findViewById(R.id.btn_myButton)
         val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
-
+        val myImage: ImageView = findViewById(R.id.iv_myImage)
 
         myName.text = "Jay의 사진 액자"
-        myName.setTextSize(Dimension.SP, 40F)
 
-
-        // 회색
-        myName.setTextColor(Color.rgb(146, 146, 146))
-
-        // 하늘색
-        myName.setBackgroundColor(Color.parseColor("#89a5ea"))
-
-
-        Log.d(TAG, "onCreate")
-
-
-        myButton.text = "다음"
+        darkModeActivate(swDarkMode)
 
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
                 if (it.resultCode == RESULT_OK) {
-                        Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
                 }
             }
         myButton.setOnClickListener {
@@ -64,16 +55,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        /*
-        myButton.setOnClickListener {
-            // 사진 불러오는 작업 구현필요
-            Snackbar.make(constlaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).setAction("취소") {
-                Log.d(TAG, "사진을 불러오는 작업 취소")
-            }
-                .show()
-        }*/
+        // step 1. asset 폴더에서 파일 열기
+        val inputStream = resources.assets.open("01.jpg")
+        val bitmap = BitmapFactory.decodeStream(inputStream)
 
-        swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+        // step 2. imageView에 표시
+        myImage.setImageBitmap(bitmap)
+        myImage.scaleType= ImageView.ScaleType.CENTER_CROP
+
+    }
+
+    private fun darkModeActivate(darkModeSwitch: Switch) {
+        darkModeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
