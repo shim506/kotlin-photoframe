@@ -23,7 +23,6 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate")
 
         val constLayout = findViewById<View>(R.id.const_layout)
-        val myName: TextView = findViewById(R.id.tv_MyName)
-        val myButton: TextView = findViewById(R.id.btn_myButton)
-        val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
+        val myName: TextView = findViewById(R.id.tvMyName)
+        val myButton: TextView = findViewById(R.id.btnMyButton)
+        val swDarkMode: Switch = findViewById(R.id.swDarkMode)
 
         // 추후 앱 사용자에 따라 다른 데이터를 대입해줄 수 있음
         myName.text = "Jay의 사진 액자"
@@ -43,19 +42,18 @@ class MainActivity : AppCompatActivity() {
         // 다크 모드 동작 컨트롤
         darkModeListen(swDarkMode)
 
+        showSnackForActivityResult(myButton, SecondActivity::class.java, "사진을 불러옵니다" , constLayout)
+    }
+
+    private fun showSnackForActivityResult(myButton: TextView, targetActivity: Class<SecondActivity> , msg : String , showingView: View ) {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK) Snackbar.make(
-                    constLayout,
-                    "사진을 불러옵니다",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                if (it.resultCode == RESULT_OK) Snackbar.make(showingView, msg, Snackbar.LENGTH_SHORT).show()
             }
 
         myButton.setOnClickListener {
-            getResult.launch(Intent(this, SecondActivity::class.java))
+            getResult.launch(Intent(this, targetActivity))
         }
-
     }
 
     private fun darkModeListen(darkModeSwitch: Switch) {
