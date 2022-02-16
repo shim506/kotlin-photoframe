@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Switch
-        android:id="@+id/sw_darkMode"
+        android:id="@+id/swDarkMode"
         style="@style/myText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,10 +19,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_MyName"
+        android:id="@+id/tvMyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_myButton"
+        android:id="@+id/btnMyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
