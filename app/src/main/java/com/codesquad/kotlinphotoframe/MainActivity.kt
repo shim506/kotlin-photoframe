@@ -17,7 +17,7 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         darkModeActivate(binding.swDarkMode)
 
         imageChangeListening()
-        shiftActivityListening()
+        moveActivityListening()
 
     }
 
-    private fun shiftActivityListening() {
+    private fun moveActivityListening() {
         binding.fabNextSheet.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRandomImage(): Bitmap {
-        var randValStr = (1..22).random().toString()
-        val path = if (randValStr.length < 2) "0${randValStr}.jpg" else "${randValStr}.jpg"
+        val randValStr = (1..22).random()
+        val path = String.format("%02d", randValStr) + ".jpg"
 
         return MyImage(path, resources.assets).getImage()
     }
