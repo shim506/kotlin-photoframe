@@ -28,18 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         darkModeActivate(binding.swDarkMode)
 
-        /*
-        val getResult =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK) {
-                    Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
-                }
-            }
-        myButton.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            getResult.launch(intent)
-        }*/
-
         imageChangeListening()
         shiftActivityListening()
 
