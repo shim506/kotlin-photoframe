@@ -11,35 +11,29 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-
+import com.codesquad.kotlinphotoframe.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
 
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var constLayout: View
-    private lateinit var tvMyName: TextView
-    private lateinit var btnMyButton: Button
-    private lateinit var swDarkMode: Switch
-    private lateinit var ivMyImage: ImageView
-    private lateinit var fabNextSheet: View
+//    private lateinit var constLayout: View
+//    private lateinit var tvMyName: TextView
+//    private lateinit var btnMyButton: Button
+//    private lateinit var swDarkMode: Switch
+//    private lateinit var ivMyImage: ImageView
+//    private lateinit var fabNextSheet: View
 
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        constLayout = findViewById(R.id.constLayout)
-        tvMyName = findViewById(R.id.tvMyName)
-        btnMyButton = findViewById(R.id.btnMyButton)
-        swDarkMode = findViewById(R.id.swDarkMode)
-        ivMyImage = findViewById(R.id.ivMyImage)
-        fabNextSheet = findViewById(R.id.fabNextSheet)
+        binding.tvMyName.text = "Jay의 사진 액자"
 
-        tvMyName.text = "Jay의 사진 액자"
-
-        darkModeActivate(swDarkMode)
+        darkModeActivate(binding.swDarkMode)
 
         /*
         val getResult =
@@ -56,21 +50,20 @@ class MainActivity : AppCompatActivity() {
         imageChangeListening()
         shiftActivityListening()
 
-
     }
 
     private fun shiftActivityListening() {
-        fabNextSheet.setOnClickListener {
+        binding.fabNextSheet.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
     }
 
     private fun imageChangeListening() {
-        btnMyButton.setOnClickListener {
+        binding.btnMyButton.setOnClickListener {
 
             // step 2. imageView에 표시
-            ivMyImage.setImageBitmap(getRandomImage())
-            ivMyImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            binding.ivMyImage.setImageBitmap(getRandomImage())
+            binding.ivMyImage.scaleType = ImageView.ScaleType.CENTER_CROP
         }
 
     }
@@ -91,37 +84,6 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
     }
 
 
