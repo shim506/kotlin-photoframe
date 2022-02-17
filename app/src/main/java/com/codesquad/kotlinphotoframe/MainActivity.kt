@@ -2,6 +2,7 @@ package com.codesquad.kotlinphotoframe
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 private const val TAG = "MainActivity"
 
@@ -32,19 +34,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d(TAG, "onCreate")
 
-        var constLaytout = findViewById<View>(R.id.const_layout)
-        val myName: TextView = findViewById(R.id.tv_MyName)
-        val myButton: Button = findViewById(R.id.btn_myButton)
-        val swDarkMode: Switch = findViewById(R.id.sw_darkMode)
-        val myImage: ImageView = findViewById(R.id.iv_myImage)
+        val constLayout = findViewById<View>(R.id.constLayout)
+        val myName: TextView = findViewById(R.id.tvMyName)
+        val myButton: Button = findViewById(R.id.btnMyButton)
+        val swDarkMode: Switch = findViewById(R.id.swDarkMode)
+        val myImage: ImageView = findViewById(R.id.ivMyImage)
 
         myName.text = "Jay의 사진 액자"
 
         darkModeActivate(swDarkMode)
 
+        /*
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-
                 if (it.resultCode == RESULT_OK) {
                     Snackbar.make(constLaytout, "사진을 불러옵니다", Snackbar.LENGTH_SHORT).show()
                 }
@@ -52,18 +54,29 @@ class MainActivity : AppCompatActivity() {
         myButton.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             getResult.launch(intent)
-        }
-
+        }*/
 
         // step 1. asset 폴더에서 파일 열기
-        val inputStream = resources.assets.open("01.jpg")
+
+        MyImage("", assetManager)
+        val inputStream = assetManager.open("01.jpg")
         val bitmap = BitmapFactory.decodeStream(inputStream)
+
 
         // step 2. imageView에 표시
         myImage.setImageBitmap(bitmap)
-        myImage.scaleType= ImageView.ScaleType.CENTER_CROP
+        myImage.scaleType = ImageView.ScaleType.CENTER_CROP
 
+
+        getRandomImage()
     }
+
+    private fun getRandomImage(): Bitmap {
+        var randValStr = (1..22).random().toString()
+        val path = if (randValStr.length >= 2) "0${randValStr}.jpg" else "${randValStr}.jpg"
+        MyImage(path, resources.assets).getImage()
+    }
+
 
     private fun darkModeActivate(darkModeSwitch: Switch) {
         darkModeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -109,3 +122,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
