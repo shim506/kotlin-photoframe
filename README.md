@@ -102,7 +102,9 @@ imageChange 함수에 구현
 <br></br>
 
 ## 갤러리에서 사진 선택하기
-
+1. Intent.ACTION_GET_CONTENT 형식의 Intent 를 뿌린다.
+2. Intent 를 받고 이미지 주소를 돌려준다.
+3. Glide 를 통해서 해당 주소에서 이미지를 가져온다.
 
 
 <br></br>
@@ -164,3 +166,8 @@ class EventPrinter : EventListener {
 - viewBinding은 gradle에 설정을통해 개발자가 작성한 레이아웃 파일들을 공식에 맞게 모두 바인딩클래스로 자동변환 해줍니다.
 - 자동변환공식 : 레이아웃파일명(첫 글자와 언더바 다음영문을 대문자로 변환) + Binding
 - ex) activity_main.xml = ActivityMainBinding
+
+## Glide 라이브러리
+- 이미지 주소를 통해서 간단히 이미지 로딩을 할 수 있다.
+- 이미지 처리에 대한 다양한 함수를 제공하낟.
+- 캐시 기능을 가지고 있어서 이미지를 빠르게 처리할 수 있다.
