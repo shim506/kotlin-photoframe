@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
     private fun getRandomImage(): Bitmap {
         val randValStr = (1..22).random()
         val path = String.format("%02d", randValStr) + ".jpg"
-
         return MyImage(path, resources.assets).getImage()
     }
 
