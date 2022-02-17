@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">kotlin-photoframe</string>
+    <string name="text_label">kotlin-photoframe</string>
 </resources>
