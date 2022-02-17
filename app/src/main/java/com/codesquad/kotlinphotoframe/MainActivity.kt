@@ -1,22 +1,18 @@
 package com.codesquad.kotlinphotoframe
 
+import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.Switch
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.GetContent
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 private const val TAG = "MainActivity"
 
@@ -42,17 +38,17 @@ class MainActivity : AppCompatActivity() {
         // 다크 모드 동작 컨트롤
         darkModeListen(swDarkMode)
 
-        showSnackForActivityResult(myButton, SecondActivity::class.java, "사진을 불러옵니다" , constLayout)
+        showSnackForActivityResult(myButton,SecondActivity() , "사진을 불러옵니다" , constLayout)
     }
 
-    private fun showSnackForActivityResult(myButton: TextView, targetActivity: Class<SecondActivity> , msg : String , showingView: View ) {
+    private fun showSnackForActivityResult(myButton: TextView, targetActivity: AppCompatActivity, msg: String, showingView: View ) {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) Snackbar.make(showingView, msg, Snackbar.LENGTH_SHORT).show()
             }
 
         myButton.setOnClickListener {
-            getResult.launch(Intent(this, targetActivity))
+            getResult.launch(Intent(this,  targetActivity::class.java))
         }
     }
 
