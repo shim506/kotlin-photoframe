@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:background="#ACACAC"
         android:id="@+id/ivMyImage"
         android:layout_width="240dp"
         android:layout_height="240dp"
