@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.codesquad.kotlinphotoframe.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "SecondActivity"
+private lateinit var binding: ActivityMainBinding
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second2)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Log.d(TAG, "onCreate")
 
@@ -25,34 +28,4 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
-    }
 }

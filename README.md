@@ -159,3 +159,8 @@ class EventPrinter : EventListener {
 - 발신자 객체에서 이벤트가 발생하면 생성시 인자로 넣은 인터페이스 함수를 실행한다.
 - 컴파일시 연결된 인터페이스 함수의 구현체로 이동하여(수신자) 원하는 동작을 실행하다.  
 
+## ViewBinding
+- findViewById 를 대체하여 사용할 수 있음
+- viewBinding은 gradle에 설정을통해 개발자가 작성한 레이아웃 파일들을 공식에 맞게 모두 바인딩클래스로 자동변환 해줍니다.
+- 자동변환공식 : 레이아웃파일명(첫 글자와 언더바 다음영문을 대문자로 변환) + Binding
+- ex) activity_main.xml = ActivityMainBinding

@@ -17,13 +17,6 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var constLayout: View
-//    private lateinit var tvMyName: TextView
-//    private lateinit var btnMyButton: Button
-//    private lateinit var swDarkMode: Switch
-//    private lateinit var ivMyImage: ImageView
-//    private lateinit var fabNextSheet: View
-
     private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
