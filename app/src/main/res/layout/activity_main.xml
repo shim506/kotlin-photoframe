@@ -19,10 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:background="#ACACAC"
         android:id="@+id/ivMyImage"
         android:layout_width="240dp"
         android:layout_height="240dp"
+        android:background="#ACACAC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,5 +55,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tvMyName" />
     ... />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNextSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|right"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

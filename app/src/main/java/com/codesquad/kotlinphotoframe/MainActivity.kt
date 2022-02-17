@@ -1,5 +1,6 @@
 package com.codesquad.kotlinphotoframe
 
+import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,16 +23,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMyButton: Button
     private lateinit var swDarkMode: Switch
     private lateinit var ivMyImage: ImageView
+    private lateinit var fabNextSheet: View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        constLayout = findViewById<View>(R.id.constLayout)
+        constLayout = findViewById(R.id.constLayout)
         tvMyName = findViewById(R.id.tvMyName)
         btnMyButton = findViewById(R.id.btnMyButton)
         swDarkMode = findViewById(R.id.swDarkMode)
         ivMyImage = findViewById(R.id.ivMyImage)
+        fabNextSheet = findViewById(R.id.fabNextSheet)
 
         tvMyName.text = "Jay의 사진 액자"
 
@@ -49,12 +53,19 @@ class MainActivity : AppCompatActivity() {
             getResult.launch(intent)
         }*/
 
-        imageChange()
+        imageChangeListening()
+        shiftActivityListening()
 
 
     }
 
-    private fun imageChange() {
+    private fun shiftActivityListening() {
+        fabNextSheet.setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+        }
+    }
+
+    private fun imageChangeListening() {
         btnMyButton.setOnClickListener {
 
             // step 2. imageView에 표시
