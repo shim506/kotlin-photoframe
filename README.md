@@ -74,22 +74,36 @@ README.md 파일을 자신의 프로젝트에 대한 설명으로 변경한다. 
 
 ## 코드로 ConstraintLayout에 View 배치하기
 
-- [ ] 실행하고 새로운 화면을 캡처해서 README.md 파일에 포함한다.
-- [x] MainActivity에 ImageView를 240 x 240 크기로 배치한다.
-- [x] ImageView에 보여줄 이미지 리소스를 다운로드 한다. 압축을 풀고, 파일들을 assets 폴더 하위에 추가한다.
-- [x] assets 폴더의 이미지 파일 01.jpg를 열어 Bitmap으로 변환해 ImageView에 표시한다.
-    - [x] 생략한 부분의 구현을 완료해주세요.
-- [ ] '다음' 버튼 클릭 시, 다운로드 받은 이미지 01~22까지 랜덤으로 숫자를 선택해서 ImageView에 표시한다.
-    - [ ] 앱이 처음 실행되었을 때는 ImageView의 배경색만 보인다.
-    - [ ] 이전 단계에서 구현했던 화면 이동 기능은 제거한다.
-    - [ ] 랜덤으로 숫자를 생성하고, fileName을 포맷에 맞게 변경한다.
-- [ ] ImageView의 scaleType 속성을 활용해 이미지를 표시하는 방법을 결정한다.
-- [ ] ImageView ~ Button까지 제약조건을 추가해
-- [ ] ConstraintLayout의 중앙에 정렬한다.
+- [x] 실행하고 새로운 화면을 캡처해서 README.md 파일에 포함한다.
+- [X] MainActivity에 ImageView를 240 x 240 크기로 배치한다.
+- [X] ImageView에 보여줄 이미지 리소스를 다운로드 한다. 압축을 풀고, 파일들을 assets 폴더 하위에 추가한다.
+- [X] assets 폴더의 이미지 파일 01.jpg를 열어 Bitmap으로 변환해 ImageView에 표시한다.
+    - [X] 생략한 부분의 구현을 완료해주세요.
+- [x] '다음' 버튼 클릭 시, 다운로드 받은 이미지 01~22까지 랜덤으로 숫자를 선택해서 ImageView에 표시한다.
+    - [x] 앱이 처음 실행되었을 때는 ImageView의 배경색만 보인다.
+    - [x] 이전 단계에서 구현했던 화면 이동 기능은 제거한다.
+    - [x] 랜덤으로 숫자를 생성하고, fileName을 포맷에 맞게 변경한다.
+- [X] ImageView의 scaleType 속성을 활용해 이미지를 표시하는 방법을 결정한다.
+- [x] ImageView ~ Button까지 제약조건을 추가해
+- [x] ConstraintLayout의 중앙에 정렬한다.
+
+```
+제시된 빈칸을 체운 부분은 아래와 같이 배치되어있습니다.
+step 1. asset 폴더에서 파일 열기 
+MyImage class 내부에서 실행
+
+step 2. imageView에 표시
+imageChange 함수에 구현
+```
+
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
 
 <br></br>
 
 ## 갤러리에서 사진 선택하기
+
+
 
 <br></br>
 
