@@ -3,6 +3,7 @@ package com.codesquad.kotlinphotoframe
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -28,10 +29,12 @@ class SecondActivity : AppCompatActivity() {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
-
+                    // 방법 1
+                    binding.contentImage.setImageURI(it.data?.data)
+                    /* 방법 2
                     Glide.with(this).load(it.data?.data).override(210, 210).centerCrop()
                         .into(binding.contentImage)
-                    Snackbar.make(layout, "이미지를 가져왔습니다", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(layout, "이미지를 가져왔습니다", Snackbar.LENGTH_SHORT).show()*/
                 }
             }
 
