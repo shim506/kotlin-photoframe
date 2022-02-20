@@ -14,13 +14,8 @@ class MyImage(private val filePath: String, private val assetManager: AssetManag
 
     fun getImage(): Bitmap {
         if (imageData == null) {
-            try {
-                if (!pathIsOk(filePath)) {
-                    throw WrongPathException(filePath)
-                }
-            } catch (e: WrongPathException) {
-                Log.d(TAG, "문제 경로 : $filePath")
-            }
+
+            if (!pathIsOk(filePath)) throw WrongPathException(filePath)
 
             // step 1. asset 폴더에서 파일 열기
             val inputStream = assetManager.open(filePath)

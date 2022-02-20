@@ -12,6 +12,7 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.codesquad.kotlinphotoframe.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "MainActivity"
 
@@ -41,17 +42,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun imageChangeListening() {
         binding.btnMyButton.setOnClickListener {
-
             // step 2. imageView에 표시
-            binding.ivMyImage.setImageBitmap(getRandomImage())
-            binding.ivMyImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            try {
+                binding.ivMyImage.setImageBitmap(getRandomImage())
+                binding.ivMyImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            } catch (e: WrongPathException) {
+                Snackbar.make(binding.constLayout, "잘못된 이미지 경로입니다", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
     }
 
     private fun getRandomImage(): Bitmap {
         val randValStr = (1..22).random()
-        val path = String.format("%02d", randValStr) + ".jpg"
+        val path = String.format("%02d", randValStr) + ".jg"
         return MyImage(path, resources.assets).getImage()
     }
 

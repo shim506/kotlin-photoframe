@@ -28,6 +28,7 @@ class SecondActivity : AppCompatActivity() {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
+
                     Glide.with(this).load(it.data?.data).override(210, 210).centerCrop()
                         .into(binding.contentImage)
                     Snackbar.make(layout, "이미지를 가져왔습니다", Snackbar.LENGTH_SHORT).show()
