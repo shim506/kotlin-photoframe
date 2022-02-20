@@ -33,13 +33,90 @@ imageChange 함수에 구현
 
 # 😃 추가 학습사항
 
-##✔Activity
+## ✔Activity LifeCycle
 
-학습중..
+### 0. 용어 설명
+- 각 라이플 사이클 에서 라이프 사이클 함수들이 콜백된다.
+- forground : Activity 가 화면에 보이고있는 경우
+- background : Activity가 화면에 보이지 않은 경우
+- foucus : 사용자가 Activity 에서   event 를 발생시킬 수  있는 상태
+
+### 1. LifeCycle Callback Method
+
+#### onCreate() 
+- 엑티비티를 생성할때 실행
+- 한번만 동작되는 초기화 및 시작 로직을 실행
+- 화면을 접근할 때마다 **변화를 주지 않아도 되는 로직**
+
+#### onStart() : STARTED 상태에서 호출
+- 엑티비티가 사용자에 보여짐
+- 사용자와의 상호작용을 준비
+
+#### onResume() : RESUMED 상태에서 호출
+- 사용자와 상호작용 가능 상태 (사용자의 포커스를 받은 상태)
+- 액티비티가 보여지는 동안만 실행해야하는 모든 기능 활성화
+
+```
+// 카메라를 "RESUME" 상태에서 초기화한다.
+// 카메라는 객체는 PAUSED 상태에서 해제 되기 때문이다.
+// 이와 같이 상황에 맞게 함수를 호출 할 필요가 있다.
+ 
+class CameraComponent : LifecycleObserver {
+   ...
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun initializeCamera() {
+        if (camera == null) {
+            getCamera()
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    fun releaseCamera() {
+        camera?.release()
+        camera = null
+    }
+    ...
+}
+```
+
+#### onPaused()
+- 사용자가 잠시 Activity 를 떠난 상태 
+- 아주 잠깐 실행되기때문에 저장작업 , 네트워크 호출등의 작업은 지양
+
+#### onStop()
+- 필요지 않는 리소스를 해제하거나 조정
+- 애니메이션을 일시중지
+    - 멀티윈도우 상황에서 포커스를 잃는 경우 onPaused() 호출
+    - 따라서 멀티윈도우를 고려하여 onStop 로직 배치
+- 데이터 저장(DB)
+
+#### onDestroy()
+- 액티비티 완전 소멸
+- finish() 호출 , 사용자의 앱종료 등
+- 메모리 해제
+- 기기회전 -> 바로 onCreate() 로 이어져서 새로운 화면 생성
+
+### A 에서 B 로의 화면 이동
+B가 완전히 시작 되기전에 A 화면은 stop 되지 않는다.
+```
+A onPause()
+B onCreate()
+B onStart()
+B onResume()
+A onStop()
+```
+
+### LifecycleOwner , LifecycleObserver
+- LifecycleOwner : Activity 객체를 말하며 Lifecycle 객체를 가지고 있습니다.
+- LifecycleObserver : LifeCycle 로부터 액티비티 상태 변화대 한 이벤트를 받습니다.
+
+
+![img_9.png](img_9.png)
+
 
 <br></br>
 
-##✔Intent
+## ✔Intent
 
 - 4대 컴포넌트들끼리 정보를 전달할 수 있게 해주는 매세징 객체이다.
 - 구성 요소로 Action 과 Data 등이 있다.
@@ -101,7 +178,7 @@ public static final String ACTION_CALL = "android.intent.action.CALL";
 - intent를 보내는 앱의 PackageManager 는 디바이스 모든앱의 인텐트 필터를 검사해서 유사도를 파악하여 수치화한다.
 <br></br>
 
-##✔ 프록시 패턴
+## ✔프록시 패턴
 
 프록시는 "대신" 이라는 의미로 프록시 패턴은 어떤 리소스를 직접 접근하지 않고 중간에 프록시 객체가 대신 응답해주는 방식을 말한다 이를 통해 리소스의 실질적 정보를 필요로하는
 순간까지 로딩을 미룰 수 있다.
@@ -113,7 +190,7 @@ public static final String ACTION_CALL = "android.intent.action.CALL";
 - 실행시 병목점을 찾거나 클라이언트가 로딩 시점을 알 수없음
   <br></br>
 
-##✔ 옵저버 패턴 및 리스너
+## ✔옵저버 패턴 및 리스너
 
 수신자 객체에서 발신자 객체로부터 event를 수신받기 위해서는 둘사이를 이어주는 Interface 를 이용할 수 있다.
 ### 1.구성
@@ -150,7 +227,7 @@ class EventPrinter : EventListener {
 - 컴파일시 연결된 인터페이스 함수의 구현체로 이동하여(수신자) 원하는 동작을 실행하다.  
   <br></br>
 
-##✔ ViewBinding
+## ✔ViewBinding
 
 - findViewById 를 대체하여 사용할 수 있음
 - viewBinding은 gradle에 설정을통해 개발자가 작성한 레이아웃 파일들을 공식에 맞게 모두 바인딩클래스로 자동변환 해줍니다.
@@ -158,7 +235,7 @@ class EventPrinter : EventListener {
 - ex) activity_main.xml = ActivityMainBinding
   <br></br>
 
-##✔ Glide 라이브러리
+## ✔Glide 라이브러리
 
 - 이미지 주소를 통해서 간단히 이미지 로딩을 할 수 있다.
 - 이미지 처리에 대한 다양한 함수를 제공하낟.
